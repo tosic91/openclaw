@@ -17,4 +17,4 @@ EXPOSE 18789
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s \
   CMD curl -f http://localhost:18789/ || exit 1
 
-CMD ["openclaw", "gateway", "--port", "18789"]
+CMD ["openclaw", "gateway", "--port", "18789", "--allow-unconfigured"]
