@@ -12,9 +12,12 @@ RUN npm install -g openclaw@latest
 # Create config directory
 RUN mkdir -p /root/.openclaw
 
+# Copy config (bind=lan for Railway internal networking, models via OpenRouter)
+COPY openclaw.docker.json /root/.openclaw/openclaw.json
+
 EXPOSE 18789
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s \
   CMD curl -f http://localhost:18789/ || exit 1
 
-CMD ["openclaw", "gateway", "--port", "18789", "--allow-unconfigured"]
+CMD ["openclaw", "gateway", "--port", "18789", "--bind", "lan", "--allow-unconfigured"]
