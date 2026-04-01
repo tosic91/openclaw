@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw globally from npm (pre-built binary)
-RUN npm install -g openclaw@latest
+# grammy is needed for Telegram channel support (not bundled with openclaw)
+RUN npm install -g openclaw@latest grammy
 
 # Create config directory
 RUN mkdir -p /root/.openclaw
