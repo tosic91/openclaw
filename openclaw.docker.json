@@ -7,6 +7,14 @@
       "token": "$OPENCLAW_GATEWAY_TOKEN"
     }
   },
+  "channels": {
+    "telegram": {
+      "botToken": "$TELEGRAM_BOT_TOKEN",
+      "direct": {
+        "allowFrom": ["*"]
+      }
+    }
+  },
   "models": {
     "providers": {
       "openrouter": {
