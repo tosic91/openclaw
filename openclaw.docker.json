@@ -10,9 +10,8 @@
   "channels": {
     "telegram": {
       "botToken": "$TELEGRAM_BOT_TOKEN",
-      "direct": {
-        "allowFrom": ["*"]
-      }
+      "dmPolicy": "open",
+      "allowFrom": ["*"]
     }
   },
   "models": {
