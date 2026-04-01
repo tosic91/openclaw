@@ -17,7 +17,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "9router/if/glm-4.7"
+        "primary": "9router/iflow/glm-4.7"
       }
     }
   },
@@ -29,15 +29,15 @@
         "api": "openai-completions",
         "models": [
           {
-            "id": "if/glm-4.7",
+            "id": "iflow/glm-4.7",
             "name": "GLM 4.7 (Free via iFlow)"
           },
           {
-            "id": "if/kimi-k2-thinking",
-            "name": "Kimi K2 Thinking (Free via iFlow)"
+            "id": "iflow/kimi-k2",
+            "name": "Kimi K2 (Free via iFlow)"
           },
           {
-            "id": "if/deepseek-r1",
+            "id": "iflow/deepseek-r1",
             "name": "DeepSeek R1 (Free via iFlow)"
           }
         ]
