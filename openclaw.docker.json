@@ -4,12 +4,12 @@
     "bind": "lan",
     "auth": {
       "mode": "token",
-      "token": "$OPENCLAW_GATEWAY_TOKEN"
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
     }
   },
   "channels": {
     "telegram": {
-      "botToken": "$TELEGRAM_BOT_TOKEN",
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
       "dmPolicy": "open",
       "allowFrom": ["*"]
     }
@@ -18,7 +18,7 @@
     "providers": {
       "openrouter": {
         "baseUrl": "https://openrouter.ai/api/v1",
-        "apiKey": "$OPENROUTER_API_KEY",
+        "apiKey": "${OPENROUTER_API_KEY}",
         "models": [
           {
             "id": "google/gemini-2.5-flash-lite",
