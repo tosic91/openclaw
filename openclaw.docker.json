@@ -25,7 +25,13 @@
     }
   },
   "tools": {
-    "profile": "full"
+    "profile": "full",
+    "exec": {
+      "host": "sandbox",
+      "security": "full",
+      "ask": "off",
+      "safeBins": ["curl", "cat", "echo", "jq"]
+    }
   },
   "models": {
     "providers": {

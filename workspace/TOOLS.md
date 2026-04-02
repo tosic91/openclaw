@@ -1,82 +1,88 @@
 # 🛠️ MH OS Tools — Hướng dẫn sử dụng
 
-## MH OS Gateway API
+## CÁCH GỌI API — BẮT BUỘC ĐỌC
 
-MH OS Gateway là trung tâm dữ liệu chạy tại: `http://mh-os.railway.internal:8000`
+**KHÔNG DÙNG `web_fetch`** vì nó chặn internal hostname.
+**LUÔN DÙNG `exec` tool với `curl`** để gọi API nội bộ.
 
-Dùng tool `web_fetch` để gọi API. Tất cả API trả về JSON.
+### Cách gọi đúng (LUÔN làm theo mẫu này):
+```json
+{"tool": "exec", "command": "curl -s http://mh-os.railway.internal:8000/health"}
+```
 
-## QUAN TRỌNG — Quy tắc khi dùng tool
+### Cách gọi SAI (KHÔNG BAO GIỜ làm):
+- ❌ `web_fetch({ url: "http://mh-os.railway.internal:8000/..." })`
+- ❌ `const result = await fetch("http://...")`
+- ❌ Viết JavaScript code để gọi API
 
-1. **KHÔNG BAO GIỜ hiển thị raw JSON hoặc function_call cho user.** Luôn parse kết quả và trả lời bằng ngôn ngữ tự nhiên.
-2. **Luôn dùng URL nội bộ Railway** (`mh-os.railway.internal:8000`), KHÔNG dùng URL public.
-3. **Luôn dùng endpoint `-summary`** khi có, để tránh response quá lớn.
-4. Format kết quả gọn gàng cho mobile: dùng emoji, bullet points, số liệu rõ ràng.
-5. Nếu API lỗi hoặc timeout, thông báo ngắn gọn và gợi ý thử lại.
-6. Format tiền tệ VNĐ (ví dụ: 150.000đ), ngày dd/mm/yyyy.
+## QUAN TRỌNG — Quy tắc
+
+1. **LUÔN dùng `exec` tool với `curl -s`** để gọi API. Thêm `-s` để tắt progress bar.
+2. **KHÔNG BAO GIỜ hiển thị raw JSON cho user.** Parse kết quả curl và trả lời bằng ngôn ngữ tự nhiên.
+3. **KHÔNG hiển thị code block hay function_call cho user trên Telegram.**
+4. **Luôn dùng endpoint `-summary`** khi có, để response gọn nhẹ.
+5. Format tiền tệ VNĐ (ví dụ: 150.000đ), ngày dd/mm/yyyy.
+6. Nếu API lỗi, thông báo ngắn gọn và gợi ý thử lại.
 
 ## API Endpoints
 
+Base URL: `http://mh-os.railway.internal:8000`
+
 ### Kiểm tra hệ thống
-```
-GET http://mh-os.railway.internal:8000/health
+```bash
+curl -s http://mh-os.railway.internal:8000/health
 ```
 
-### Pancake POS — Đơn hàng tổng hợp (DÙNG ENDPOINT NÀY cho danh sách)
+### Đơn hàng — Danh sách tổng hợp
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/pancake/orders-summary/407181592?page=1"
 ```
-GET http://mh-os.railway.internal:8000/api/pancake/orders-summary/407181592?page=1
-```
-Trả về tóm tắt đơn hàng gọn nhẹ gồm: id, status, bill_total, customer_name, items_count, created_at.
-Có sẵn total_orders và total_revenue.
+Trả về: total_orders, total_revenue, và danh sách gọn (id, status, bill_total, customer_name, items_count).
 
-### Pancake POS — Chi tiết 1 đơn hàng (MỚI)
+### Đơn hàng — Chi tiết 1 đơn
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/pancake/order-detail/407181592/{order_id}"
 ```
-GET http://mh-os.railway.internal:8000/api/pancake/order-detail/407181592/{order_id}
-```
-Trả về chi tiết 1 đơn: thông tin khách, địa chỉ ship, danh sách sản phẩm trong đơn (tên, số lượng, giá).
-Dùng khi user hỏi "Đơn #12345 gồm gì?"
+Thay {order_id} bằng mã đơn. Trả về: sản phẩm trong đơn, giá, người mua, địa chỉ ship.
 
-### Pancake POS — Tìm sản phẩm & tồn kho (MỚI)
-```
-GET http://mh-os.railway.internal:8000/api/pancake/products-summary/407181592?search=<từ khóa>&page=1&page_size=10
+### Sản phẩm — Tìm kiếm & tồn kho
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/pancake/products-summary/407181592?search=catan&page=1&page_size=10"
 ```
 Tìm sản phẩm theo tên. Trả về: tên, giá, tồn kho, variants.
-Dùng khi user hỏi "Còn bao nhiêu bộ Catan?" hoặc "Giá sản phẩm X?"
 
-### Pancake POS — Tìm khách hàng (MỚI - summary)
+### Khách hàng — Tìm kiếm
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/pancake/customers-summary/407181592?search=Minh"
 ```
-GET http://mh-os.railway.internal:8000/api/pancake/customers-summary/407181592?search=<tên hoặc SĐT>
-```
-Trả về: tên, SĐT, email, tổng đơn, tổng chi tiêu.
+Tìm theo tên hoặc SĐT. Trả về: tên, SĐT, email, tổng đơn, tổng chi tiêu.
 
-### Pancake POS — Danh sách shop
-```
-GET http://mh-os.railway.internal:8000/api/pancake/shops
+### Danh sách shop
+```bash
+curl -s http://mh-os.railway.internal:8000/api/pancake/shops
 ```
 
-### Pancake Chat — Hội thoại
-```
-GET http://mh-os.railway.internal:8000/api/pancake/conversations/<page_id>?limit=10
+### Hội thoại chat
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/pancake/conversations/{page_id}?limit=10"
 ```
 
 ### Shopify — Tìm sản phẩm
-```
-GET http://mh-os.railway.internal:8000/api/shopify/products/search?q=<từ khóa>
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/shopify/products/search?q=board+game"
 ```
 
 ### Shopify — Tổng sản phẩm
-```
-GET http://mh-os.railway.internal:8000/api/shopify/products/count
+```bash
+curl -s http://mh-os.railway.internal:8000/api/shopify/products/count
 ```
 
 ### Shopify — Đơn hàng
-```
-GET http://mh-os.railway.internal:8000/api/shopify/orders
+```bash
+curl -s http://mh-os.railway.internal:8000/api/shopify/orders
 ```
 
 ### Telegram — Gửi thông báo
+```bash
+curl -s -X POST http://mh-os.railway.internal:8000/api/telegram/send -H "Content-Type: application/json" -d '{"message": "Nội dung"}'
 ```
-POST http://mh-os.railway.internal:8000/api/telegram/send
-Body: {"message": "Nội dung"}
-```
-
