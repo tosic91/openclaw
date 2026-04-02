@@ -22,21 +22,36 @@ Dùng tool `web_fetch` để gọi API. Tất cả API trả về JSON.
 GET http://mh-os.railway.internal:8000/health
 ```
 
-### Pancake POS — Đơn hàng (DÙNG ENDPOINT NÀY)
+### Pancake POS — Đơn hàng tổng hợp (DÙNG ENDPOINT NÀY cho danh sách)
 ```
 GET http://mh-os.railway.internal:8000/api/pancake/orders-summary/407181592?page=1
 ```
-Trả về tóm tắt đơn hàng gọn nhẹ: id, status, bill_total, customer_name, items_count, created_at.
-Có tổng total_orders và total_revenue sẵn.
+Trả về tóm tắt đơn hàng gọn nhẹ gồm: id, status, bill_total, customer_name, items_count, created_at.
+Có sẵn total_orders và total_revenue.
+
+### Pancake POS — Chi tiết 1 đơn hàng (MỚI)
+```
+GET http://mh-os.railway.internal:8000/api/pancake/order-detail/407181592/{order_id}
+```
+Trả về chi tiết 1 đơn: thông tin khách, địa chỉ ship, danh sách sản phẩm trong đơn (tên, số lượng, giá).
+Dùng khi user hỏi "Đơn #12345 gồm gì?"
+
+### Pancake POS — Tìm sản phẩm & tồn kho (MỚI)
+```
+GET http://mh-os.railway.internal:8000/api/pancake/products-summary/407181592?search=<từ khóa>&page=1&page_size=10
+```
+Tìm sản phẩm theo tên. Trả về: tên, giá, tồn kho, variants.
+Dùng khi user hỏi "Còn bao nhiêu bộ Catan?" hoặc "Giá sản phẩm X?"
+
+### Pancake POS — Tìm khách hàng (MỚI - summary)
+```
+GET http://mh-os.railway.internal:8000/api/pancake/customers-summary/407181592?search=<tên hoặc SĐT>
+```
+Trả về: tên, SĐT, email, tổng đơn, tổng chi tiêu.
 
 ### Pancake POS — Danh sách shop
 ```
 GET http://mh-os.railway.internal:8000/api/pancake/shops
-```
-
-### Pancake POS — Tìm khách hàng
-```
-GET http://mh-os.railway.internal:8000/api/pancake/customers/407181592?search=<tên hoặc SĐT>
 ```
 
 ### Pancake Chat — Hội thoại
