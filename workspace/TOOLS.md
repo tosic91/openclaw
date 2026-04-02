@@ -150,4 +150,60 @@ Khi user yêu cầu phân tích, hãy:
 - 📈 Giá trị đơn trung bình
 - ⚠️ Đơn chờ xử lý cần follow up
 - 🔥 Sản phẩm sắp hết hàng (tồn kho thấp)
+
+### ⏰ QUAN TRỌNG — Nhận biết thời gian đơn hàng:
+Khi user hỏi "đơn mới nhất", "có đơn mới không":
+1. **Luôn so sánh** thời gian đơn hàng với thời điểm hiện tại
+2. **Nếu đơn "mới nhất" đã cách đây >1 giờ**: Nói rõ "Đơn mới nhất là từ lúc X giờ sáng/chiều. Từ đó đến hiện tại (Y giờ) chưa có đơn mới nào phát sinh."
+3. **KHÔNG BAO GIỜ** trình bày đơn cũ như thể nó vừa mới xảy ra
+4. **Nếu user nói "không phải, đơn cũ rồi"**: Xác nhận rằng đây đúng là đơn mới nhất trên hệ thống, giải thích rõ ràng
+5. Ví dụ đúng: "Đơn mới nhất trên Pancake là từ 8:14 sáng nay — tức cách đây khoảng 7 tiếng. Hiện chưa có thêm đơn mới nào phát sinh từ đó đến bây giờ anh nhé."
 - 📣 Kênh bán nào hiệu quả nhất (doanh thu/đơn cao nhất)
+
+---
+
+## 🤖 Phase 1 — Hệ thống Tự Động
+
+### ⏰ Kiểm tra Scheduled Jobs
+```bash
+curl -s http://mh-os.railway.internal:8000/api/scheduler/status
+```
+Xem trạng thái tất cả các job tự động (daily summary, inventory check, etc.), lần chạy tiếp theo.
+
+### 🔧 Trigger Job Thủ Công
+```bash
+curl -s -X POST http://mh-os.railway.internal:8000/api/scheduler/trigger/daily-summary
+```
+Chạy một job ngay lập tức. Các job có sẵn:
+- `daily-summary` — Tổng kết ngày
+- `morning-briefing` — Briefing sáng
+- `inventory-alert` — Kiểm tra tồn kho
+- `pending-orders` — Kiểm tra đơn pending
+- `memory-cleanup` — Dọn dẹp bộ nhớ
+
+### 🧠 Kiểm tra Memory
+```bash
+curl -s http://mh-os.railway.internal:8000/api/memory/stats
+```
+Xem thống kê bộ nhớ hội thoại: tổng conversations, messages, active 24h.
+
+### 📚 Kiểm tra Knowledge Base
+```bash
+curl -s http://mh-os.railway.internal:8000/api/knowledge/stats
+```
+
+### 🖥️ Tổng quan hệ thống
+```bash
+curl -s http://mh-os.railway.internal:8000/api/system/overview
+```
+Xem toàn bộ trạng thái: scheduler, memory, knowledge, integrations.
+
+### 📌 Các job tự động đang chạy:
+| Job | Lịch | Mô tả |
+|-----|------|-------|
+| Daily Summary | 6PM hàng ngày | Tổng kết doanh thu, đơn hàng, top SP |
+| Morning Briefing | 8AM hàng ngày | Recap hôm qua + đơn pending |
+| Inventory Alert | Mỗi 2h (8AM-10PM) | Cảnh báo hết hàng/sắp hết |
+| Pending Orders | Mỗi 30 phút | Alert đơn chờ >2h, đơn VIP >500K |
+| Memory Cleanup | 3AM hàng ngày | Dọn conversations cũ >72h |
+
