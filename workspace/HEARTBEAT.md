@@ -1,0 +1,60 @@
+# ❤️ Heartbeat — Scheduled Proactive Behaviors
+
+## What This Controls
+These are automated check-ins the system performs WITHOUT being asked. Each heartbeat triggers a Gateway scheduler job that sends results to Telegram.
+
+## Active Heartbeats (Wave 1+2)
+
+### ☀️ Morning Startup (8:00 AM)
+- **Job**: `morning-briefing`
+- **Action**: Recap yesterday's revenue, top products, pending orders
+- **Output**: Telegram message to Founder
+- **Autonomy**: Full auto
+
+### 📋 Warehouse Dispatch (8:15 AM)
+- **Job**: `coo-pick-list`
+- **Action**: Scan pending orders → format pick list → send to Warehouse Team
+- **Output**: Telegram pick list (VIP orders first)
+- **Autonomy**: Full auto
+
+### ✍️ Daily Content (9:00 AM)
+- **Job**: `content-writer`
+- **Action**: AI generates Facebook caption based on trending products + day theme
+- **Output**: Telegram preview to Founder
+- **Autonomy**: Full auto (CMO approved)
+
+### 📦 Inventory Pulse (Every 2h, 8AM-10PM)
+- **Job**: `inventory-alert`
+- **Action**: Check stock levels, alert if any product < 5 units
+- **Output**: Telegram alert (only if low stock found)
+- **Autonomy**: Full auto
+
+### ⏰ Order Watch (Every 30m, 8AM-11PM)
+- **Job**: `pending-orders`
+- **Action**: Find orders pending > 2 hours, VIP orders > 500K
+- **Output**: Telegram alert
+- **Autonomy**: Full auto
+
+### 📊 End of Day (6:00 PM)
+- **Job**: `daily-summary`
+- **Action**: Complete daily dashboard — revenue, orders, channels, top products, top customers
+- **Output**: Telegram report to Founder
+- **Autonomy**: Full auto
+
+### 💬 CS Quality (9:00 PM)
+- **Job**: `cco-quality-review`
+- **Action**: Review conversation metrics, CS→Order conversion, recommendations
+- **Output**: Telegram report to Founder
+- **Autonomy**: Full auto
+
+### 🧹 Maintenance (3:00 AM)
+- **Job**: `memory-cleanup`
+- **Action**: Clean conversations older than 72 hours
+- **Output**: Silent (log only)
+- **Autonomy**: Full auto
+
+## Planned Heartbeats (Wave 3+)
+- Weekly performance report (Monday 9AM)
+- Marketplace health check (9AM, 3PM)
+- SEO ranking tracker (Weekly)
+- Financial summary (End of month)
