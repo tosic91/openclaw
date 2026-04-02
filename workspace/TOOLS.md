@@ -33,11 +33,17 @@ Base URL: `http://mh-os.railway.internal:8000`
 curl -s http://mh-os.railway.internal:8000/health
 ```
 
-### Đơn hàng — Danh sách tổng hợp
+### Đơn hàng — Danh sách theo ngày (LUÔN TRUYỀN date!)
 ```bash
-curl -s "http://mh-os.railway.internal:8000/api/pancake/orders-summary/407181592?page=1"
+curl -s "http://mh-os.railway.internal:8000/api/pancake/orders-summary/407181592?date=today"
 ```
-Trả về: total_orders, total_revenue, và danh sách gọn (id, status, bill_total, customer_name, items_count).
+**QUAN TRỌNG**: Khi user hỏi "hôm nay có bao nhiêu đơn" → dùng `?date=today`
+- `?date=today` = đơn hôm nay
+- `?date=yesterday` = đơn hôm qua
+- `?date=2026-04-01` = đơn ngày cụ thể
+- Không truyền date = 10 đơn mới nhất (mọi ngày)
+
+Trả về: count (số đơn), total_revenue (doanh thu), và danh sách gọn (order_id, status, amount, customer).
 
 ### Đơn hàng — Chi tiết 1 đơn
 ```bash
