@@ -162,24 +162,31 @@ Khi user hỏi "đơn mới nhất", "có đơn mới không":
 
 ---
 
-## 🤖 Phase 1 — Hệ thống Tự Động
+## 🤖 Hệ thống Agents (Wave 1+2)
 
 ### ⏰ Kiểm tra Scheduled Jobs
 ```bash
 curl -s http://mh-os.railway.internal:8000/api/scheduler/status
 ```
-Xem trạng thái tất cả các job tự động (daily summary, inventory check, etc.), lần chạy tiếp theo.
+Xem trạng thái tất cả 8 job tự động, lần chạy tiếp theo.
 
 ### 🔧 Trigger Job Thủ Công
 ```bash
 curl -s -X POST http://mh-os.railway.internal:8000/api/scheduler/trigger/daily-summary
 ```
 Chạy một job ngay lập tức. Các job có sẵn:
-- `daily-summary` — Tổng kết ngày
-- `morning-briefing` — Briefing sáng
-- `inventory-alert` — Kiểm tra tồn kho
-- `pending-orders` — Kiểm tra đơn pending
+
+**Wave 1:**
+- `daily-summary` — [CEO] Tổng kết ngày
+- `morning-briefing` — [CEO] Briefing sáng
+- `inventory-alert` — [Inventory-Agent] Kiểm tra tồn kho
+- `pending-orders` — [Order-Processor] Kiểm tra đơn pending
 - `memory-cleanup` — Dọn dẹp bộ nhớ
+
+**Wave 2:**
+- `coo-pick-list` — [COO] Pick list đóng gói cho Warehouse Team
+- `content-writer` — [Content-Writer] Tạo caption FB tự động
+- `cco-quality-review` — [CCO] Review chất lượng CSKH
 
 ### 🧠 Kiểm tra Memory
 ```bash
@@ -198,12 +205,20 @@ curl -s http://mh-os.railway.internal:8000/api/system/overview
 ```
 Xem toàn bộ trạng thái: scheduler, memory, knowledge, integrations.
 
-### 📌 Các job tự động đang chạy:
-| Job | Lịch | Mô tả |
-|-----|------|-------|
-| Daily Summary | 6PM hàng ngày | Tổng kết doanh thu, đơn hàng, top SP |
-| Morning Briefing | 8AM hàng ngày | Recap hôm qua + đơn pending |
-| Inventory Alert | Mỗi 2h (8AM-10PM) | Cảnh báo hết hàng/sắp hết |
-| Pending Orders | Mỗi 30 phút | Alert đơn chờ >2h, đơn VIP >500K |
-| Memory Cleanup | 3AM hàng ngày | Dọn conversations cũ >72h |
+### 📌 Tất cả jobs tự động:
+| Job | Agent | Lịch | Mô tả |
+|-----|-------|------|-------|
+| Daily Summary | CEO | 6PM | Tổng kết doanh thu, đơn hàng, top SP |
+| Morning Briefing | CEO | 8AM | Recap hôm qua + đơn pending |
+| Inventory Alert | Inventory-Agent | Mỗi 2h | Cảnh báo hết hàng/sắp hết |
+| Pending Orders | Order-Processor | Mỗi 30p | Alert đơn chờ >2h, đơn VIP >500K |
+| Memory Cleanup | System | 3AM | Dọn conversations cũ >72h |
+| **Pick List** | **COO** | **8:15AM** | **Pick list đóng gói → Warehouse** |
+| **Content Post** | **Content-Writer** | **9AM** | **Auto caption FB (AI-generated)** |
+| **CS Review** | **CCO** | **9PM** | **Review chất lượng CSKH hàng ngày** |
 
+### 🏢 Org Chart (22 AI Agents — 9 Phòng Ban)
+```bash
+curl -s http://mh-os.railway.internal:8000/api/system/overview
+```
+Xem config tại `data/org-chart.json`. Toàn bộ agents, departments, autonomy rules.
