@@ -18,7 +18,7 @@
     "defaults": {
       "workspace": "/root/mhos-workspace",
       "model": {
-        "primary": "9router/iflow/kimi-k2"
+        "primary": "9router/iflow/deepseek-v3.2-exp"
       },
       "userTimezone": "Asia/Ho_Chi_Minh",
       "timeFormat": "24"
@@ -50,6 +50,25 @@
           {
             "id": "iflow/deepseek-v3.2-exp",
             "name": "DeepSeek V3.2 Exp (Free via iFlow)"
+          }
+        ]
+      },
+      "openrouter": {
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "apiKey": "${OPENROUTER_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "google/gemini-2.5-pro-preview",
+            "name": "Gemini 2.5 Pro"
+          },
+          {
+            "id": "anthropic/claude-sonnet-4",
+            "name": "Claude Sonnet 4"
+          },
+          {
+            "id": "deepseek/deepseek-r1",
+            "name": "DeepSeek R1 (Reasoning)"
           }
         ]
       }
