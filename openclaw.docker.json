@@ -16,10 +16,16 @@
   },
   "agents": {
     "defaults": {
+      "workspace": "/root/mhos-workspace",
       "model": {
         "primary": "9router/iflow/qwen3-coder-plus"
-      }
+      },
+      "userTimezone": "Asia/Ho_Chi_Minh",
+      "timeFormat": "24"
     }
+  },
+  "tools": {
+    "profile": "full"
   },
   "models": {
     "providers": {

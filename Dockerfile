@@ -10,11 +10,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # grammy + sub-packages needed for Telegram channel support (peer deps of @openclaw/telegram)
 RUN npm install -g openclaw@latest grammy @grammyjs/runner @grammyjs/transformer-throttler
 
-# Create config directory
-RUN mkdir -p /root/.openclaw
+# Create config directory and workspace
+RUN mkdir -p /root/.openclaw /root/mhos-workspace
 
-# Copy config (bind=lan for Railway internal networking, models via OpenRouter)
+# Copy config (bind=lan for Railway internal networking, models via 9Router)
 COPY openclaw.docker.json /root/.openclaw/openclaw.json
+
+# Copy workspace bootstrap files (SOUL, TOOLS, IDENTITY, USER)
+COPY workspace/ /root/mhos-workspace/
 
 EXPOSE 18789
 
