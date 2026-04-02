@@ -18,7 +18,7 @@
     "defaults": {
       "workspace": "/root/mhos-workspace",
       "model": {
-        "primary": "9router/iflow/qwen3-coder-plus"
+        "primary": "9router/iflow/kimi-k2"
       },
       "userTimezone": "Asia/Ho_Chi_Minh",
       "timeFormat": "24"
