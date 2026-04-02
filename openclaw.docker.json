@@ -27,7 +27,7 @@
   "tools": {
     "profile": "full",
     "exec": {
-      "host": "sandbox",
+      "host": "gateway",
       "security": "full",
       "ask": "off",
       "safeBins": ["curl", "cat", "echo", "jq"]
