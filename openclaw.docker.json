@@ -18,7 +18,7 @@
     "defaults": {
       "workspace": "/root/mhos-workspace",
       "model": {
-        "primary": "9router/iflow/deepseek-v3.2-exp"
+        "primary": "9router/iflow/kimi-k2"
       },
       "userTimezone": "Asia/Ho_Chi_Minh",
       "timeFormat": "24"
@@ -48,8 +48,12 @@
             "name": "Kimi K2 (Free via iFlow)"
           },
           {
-            "id": "iflow/deepseek-v3.2-exp",
-            "name": "DeepSeek V3.2 Exp (Free via iFlow)"
+            "id": "iflow/deepseek-v3.2",
+            "name": "DeepSeek V3.2 (Free via iFlow)"
+          },
+          {
+            "id": "iflow/qwen3-max",
+            "name": "Qwen3 Max (Free via iFlow)"
           }
         ]
       },
