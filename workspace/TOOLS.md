@@ -37,10 +37,11 @@ curl -s "http://mh-os.railway.internal:8000/api/pancake/daily-dashboard/40718159
 ```
 **Endpoint mạnh nhất — 1 API call ra toàn bộ insight:**
 - Tổng đơn, tổng doanh thu, giá trị đơn trung bình
+- **Phân loại theo kênh bán** (Shopee, TikTok Shop, Lazada, Fanpage, Zalo, POS)
 - Phân loại theo trạng thái (đã giao, chờ xử lý, hủy...)
 - Top 5 sản phẩm bán chạy nhất (tên, số lượng, doanh thu)
 - Top 5 khách hàng chi tiêu nhiều nhất
-- Danh sách 10 đơn gần nhất
+- Danh sách 10 đơn gần nhất (có kèm kênh bán)
 
 Tham số `date`: `today`, `yesterday`, hoặc `YYYY-MM-DD`
 
@@ -143,8 +144,10 @@ Khi user yêu cầu phân tích, hãy:
 
 ### Các insight nên đưa ra:
 - 📊 So sánh hôm nay vs hôm qua (đơn hàng, doanh thu)
+- 🛒 **Phân tích theo kênh bán**: Shopee chiếm bao nhiêu %, TikTok Shop, Fanpage, v.v.
 - 🏆 Sản phẩm bán chạy nhất
 - 💰 Khách hàng VIP (chi tiêu nhiều nhất)
 - 📈 Giá trị đơn trung bình
 - ⚠️ Đơn chờ xử lý cần follow up
 - 🔥 Sản phẩm sắp hết hàng (tồn kho thấp)
+- 📣 Kênh bán nào hiệu quả nhất (doanh thu/đơn cao nhất)
