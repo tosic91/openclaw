@@ -18,7 +18,7 @@
     "defaults": {
       "workspace": "/root/mhos-workspace",
       "model": {
-        "primary": "9router/iflow/kimi-k2"
+        "primary": "9router/gemini/gemini-2.5-flash"
       },
       "userTimezone": "Asia/Ho_Chi_Minh",
       "timeFormat": "24"
@@ -54,6 +54,14 @@
           {
             "id": "iflow/qwen3-max",
             "name": "Qwen3 Max (Free via iFlow)"
+          },
+          {
+            "id": "gemini/gemini-2.5-flash",
+            "name": "Gemini 2.5 Flash (Free via Google AI Studio)"
+          },
+          {
+            "id": "gemini/gemini-2.5-pro",
+            "name": "Gemini 2.5 Pro (Free tier)"
           }
         ]
       },
