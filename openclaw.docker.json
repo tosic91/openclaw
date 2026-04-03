@@ -12,6 +12,26 @@
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "dmPolicy": "open",
       "allowFrom": ["*"]
+    },
+    "feishu": {
+      "enabled": true,
+      "domain": "lark",
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
+      "groupPolicy": "open",
+      "requireMention": true,
+      "streaming": true,
+      "blockStreaming": true,
+      "typingIndicator": true,
+      "resolveSenderNames": true,
+      "accounts": {
+        "default": {
+          "appId": "${LARK_APP_ID}",
+          "appSecret": "${LARK_APP_SECRET}",
+          "name": "MH Bot",
+          "domain": "lark"
+        }
+      }
     }
   },
   "agents": {
