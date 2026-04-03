@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install OpenClaw globally from npm (pre-built binary)
 # grammy + sub-packages needed for Telegram channel support (peer deps of @openclaw/telegram)
-RUN npm install -g openclaw@latest grammy @grammyjs/runner @grammyjs/transformer-throttler
+# grammy: Telegram channel | @larksuiteoapi/node-sdk: Feishu/Lark channel
+RUN npm install -g openclaw@latest grammy @grammyjs/runner @grammyjs/transformer-throttler @larksuiteoapi/node-sdk
 
 # Create config directory and workspace
 RUN mkdir -p /root/.openclaw /root/mhos-workspace
