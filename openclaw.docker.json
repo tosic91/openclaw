@@ -38,7 +38,7 @@
     "defaults": {
       "workspace": "/root/mhos-workspace",
       "model": {
-        "primary": "9router/gemini-with-fallback"
+        "primary": "9router/gemini/gemini-2.5-flash"
       },
       "timeoutSeconds": 120,
       "userTimezone": "Asia/Ho_Chi_Minh",
