@@ -38,9 +38,14 @@
     "defaults": {
       "workspace": "/root/mhos-workspace",
       "model": {
-        "primary": "9router/gemini/gemini-2.5-flash"
+        "primary": "9router/gemini/gemini-2.5-flash",
+        "fallback": [
+          "9router/iflow/qwen3-coder-plus",
+          "9router/iflow/deepseek-v3.2",
+          "9router/iflow/kimi-k2"
+        ]
       },
-      "timeoutSeconds": 120,
+      "timeoutSeconds": 180,
       "userTimezone": "Asia/Ho_Chi_Minh",
       "timeFormat": "24"
     }
