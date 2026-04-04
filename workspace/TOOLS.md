@@ -2,8 +2,26 @@
 
 ## CÁCH GỌI API — BẮT BUỘC ĐỌC
 
-**KHÔNG DÙNG `web_fetch`** vì nó chặn internal hostname.
-**LUÔN DÙNG `exec` tool với `curl`** để gọi API nội bộ.
+**LUÔN DÙNG `exec` tool với `curl -s`** để gọi API.
+
+### Hai nguồn dữ liệu:
+
+**1. Pancake POS API TRỰC TIẾP** (ưu tiên khi cần dữ liệu chi tiết):
+```bash
+curl -s "https://pos.pages.fm/api/v1/shops/407181592/orders?api_key=$PANCAKE_POS_API_KEY&page_size=20"
+```
+→ Xem **PANCAKE-API.md** để biết toàn bộ 26 categories, 100+ endpoints.
+
+**2. MH OS Gateway** (dùng cho daily-dashboard tổng hợp + Shopify + Telegram):
+```bash
+curl -s "http://mh-os.railway.internal:8000/api/pancake/daily-dashboard/407181592?date=today"
+```
+
+### Quy tắc chọn nguồn:
+- **Hỏi tổng quan kinh doanh hôm nay** → Gateway daily-dashboard (đã tính toán sẵn)
+- **Hỏi chi tiết bất kỳ** (tồn kho, thu chi, nhà cung cấp, thống kê tháng, công nợ...) → Pancake API trực tiếp
+- **Shopify** → Gateway (`/api/shopify/...`)
+- **Telegram alert** → Gateway (`/api/telegram/send`)
 
 ### Cách gọi đúng (LUÔN làm theo mẫu này):
 ```json
