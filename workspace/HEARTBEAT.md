@@ -23,17 +23,15 @@ These are automated check-ins the system performs WITHOUT being asked. Each hear
 - **Output**: Telegram preview to Founder
 - **Autonomy**: Full auto (CMO approved)
 
-### 📦 Inventory Pulse (Every 2h, 8AM-10PM)
+### 📦 ~~Inventory Pulse~~ — ĐÃ TẮT
 - **Job**: `inventory-alert`
-- **Action**: Check stock levels, alert if any product < 5 units
-- **Output**: Telegram alert (only if low stock found)
-- **Autonomy**: Full auto
+- **Trạng thái**: ❌ **DISABLED** — Founder yêu cầu tắt (04/04/2026)
+- **KHÔNG được tự trigger job này**
 
-### ⏰ Order Watch (Every 30m, 8AM-11PM)
+### ⏰ ~~Order Watch~~ — ĐÃ TẮT
 - **Job**: `pending-orders`
-- **Action**: Find orders pending > 2 hours, VIP orders > 500K
-- **Output**: Telegram alert
-- **Autonomy**: Full auto
+- **Trạng thái**: ❌ **DISABLED** — Founder yêu cầu tắt (04/04/2026)
+- **KHÔNG được tự trigger job này, KHÔNG gửi thông báo Đơn VIP**
 
 ### 📊 End of Day (6:00 PM)
 - **Job**: `daily-summary`
