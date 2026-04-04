@@ -39,10 +39,10 @@
       "workspace": "/root/mhos-workspace",
       "model": {
         "primary": "9router/gemini/gemini-2.5-flash",
-        "fallback": [
+        "fallbacks": [
           "9router/iflow/qwen3-coder-plus",
-          "9router/iflow/deepseek-v3.2",
-          "9router/iflow/kimi-k2"
+          "9router/iflow/qwen3-max",
+          "9router/iflow/kimi-k2-0905"
         ]
       },
       "timeoutSeconds": 180,
