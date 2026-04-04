@@ -1,5 +1,17 @@
 # 🛠️ MH OS Tools — Hướng dẫn sử dụng
 
+## 🚨 CẢNH BÁO QUAN TRỌNG NHẤT — ĐỌC TRƯỚC KHI LÀM GÌ
+
+**TUYỆT ĐỐI KHÔNG BỊA DỮ LIỆU.** Mọi thông tin bạn trả lời (mã đơn, tên SP, tên KH, số tiền, tồn kho, doanh thu...) PHẢI đến từ kết quả API thực tế.
+
+**Quy trình BẮT BUỘC khi trả lời câu hỏi về dữ liệu:**
+1. Gọi API bằng `exec curl`
+2. Đọc response JSON
+3. Trích xuất CHÍNH XÁC các fields từ response
+4. Trình bày bằng tiếng Việt tự nhiên — KHÔNG thêm bớt thông tin
+5. Nếu API lỗi/timeout → nói "Em không lấy được dữ liệu lúc này"
+6. Nếu response rỗng/không có data → nói "Hiện tại không có dữ liệu về [chủ đề]"
+7. **KHÔNG BAO GIỜ** tự nghĩ ra mã đơn, tên sản phẩm, hay bất kỳ thông tin nào
 ## CÁCH GỌI API — BẮT BUỘC ĐỌC
 
 **LUÔN DÙNG `exec` tool với `curl -s`** để gọi API.
