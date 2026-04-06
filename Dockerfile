@@ -1,5 +1,5 @@
-# Railway-compatible OpenClaw Dockerfile
-# Installs pre-built OpenClaw from npm to avoid complex build deps
+# Railway-compatible OpenClaw Dockerfile — Multi-Agent Setup
+# 5 agents: CEO, CS, COO, CMO, CCO
 FROM node:22-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -7,19 +7,34 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw globally from npm (pre-built binary)
-# grammy + sub-packages needed for Telegram channel support (peer deps of @openclaw/telegram)
-# grammy: Telegram channel | @larksuiteoapi/node-sdk: Feishu/Lark channel
+# @larksuiteoapi/node-sdk: Feishu/Lark channel (primary)
 # @buape/carbon: required by openclaw Control UI dashboard
-RUN npm install -g openclaw@latest grammy @grammyjs/runner @grammyjs/transformer-throttler @larksuiteoapi/node-sdk @buape/carbon
+RUN npm install -g openclaw@latest @larksuiteoapi/node-sdk @buape/carbon
 
-# Create config directory and workspace
-RUN mkdir -p /root/.openclaw /root/mhos-workspace
+# Create config directory and agent workspaces
+RUN mkdir -p /root/.openclaw \
+    /root/workspace-ceo/skills \
+    /root/workspace-cs/skills \
+    /root/workspace-coo/skills \
+    /root/workspace-cmo/skills \
+    /root/workspace-cco/skills
 
-# Copy config (bind=lan for Railway internal networking, models via 9Router)
+# Copy config (multi-agent, Lark-only, models via 9Router)
 COPY openclaw.docker.json /root/.openclaw/openclaw.json
 
-# Copy workspace bootstrap files (SOUL, TOOLS, IDENTITY, USER)
-COPY workspace/ /root/mhos-workspace/
+# Copy shared workspace files to ALL agent workspaces
+COPY workspace-shared/ /root/workspace-ceo/
+COPY workspace-shared/ /root/workspace-cs/
+COPY workspace-shared/ /root/workspace-coo/
+COPY workspace-shared/ /root/workspace-cmo/
+COPY workspace-shared/ /root/workspace-cco/
+
+# Copy agent-specific files (SOUL.md, AGENTS.md, skills/)
+COPY workspace-ceo/ /root/workspace-ceo/
+COPY workspace-cs/ /root/workspace-cs/
+COPY workspace-coo/ /root/workspace-coo/
+COPY workspace-cmo/ /root/workspace-cmo/
+COPY workspace-cco/ /root/workspace-cco/
 
 EXPOSE 18789
 
