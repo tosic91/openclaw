@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install OpenClaw globally from npm (pre-built binary)
 # @larksuiteoapi/node-sdk: Feishu/Lark channel (primary)
 # @buape/carbon: required by openclaw Control UI dashboard
-RUN npm install -g openclaw@latest @larksuiteoapi/node-sdk @buape/carbon
+RUN npm install -g openclaw@latest @larksuiteoapi/node-sdk @buape/carbon @slack/web-api
 
 # Create config directory and agent workspaces
 RUN mkdir -p /root/.openclaw \
