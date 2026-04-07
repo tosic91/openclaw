@@ -24,15 +24,46 @@
       "typingIndicator": true,
       "resolveSenderNames": true,
       "accounts": {
-        "default": {
-          "appId": "${LARK_APP_ID}",
-          "appSecret": "${LARK_APP_SECRET}",
-          "name": "MH Bot",
+        "ceo": {
+          "appId": "${LARK_CEO_APP_ID}",
+          "appSecret": "${LARK_CEO_APP_SECRET}",
+          "name": "CEO Bot",
+          "domain": "lark"
+        },
+        "cs": {
+          "appId": "${LARK_CS_APP_ID}",
+          "appSecret": "${LARK_CS_APP_SECRET}",
+          "name": "CS Bot",
+          "domain": "lark"
+        },
+        "coo": {
+          "appId": "${LARK_COO_APP_ID}",
+          "appSecret": "${LARK_COO_APP_SECRET}",
+          "name": "COO Bot",
+          "domain": "lark"
+        },
+        "cmo": {
+          "appId": "${LARK_CMO_APP_ID}",
+          "appSecret": "${LARK_CMO_APP_SECRET}",
+          "name": "CMO Bot",
+          "domain": "lark"
+        },
+        "cco": {
+          "appId": "${LARK_CCO_APP_ID}",
+          "appSecret": "${LARK_CCO_APP_SECRET}",
+          "name": "CCO Bot",
           "domain": "lark"
         }
       }
     }
   },
+  "bindings": [
+    { "agentId": "ceo", "match": { "channel": "feishu", "accountId": "ceo" } },
+    { "agentId": "cs",  "match": { "channel": "feishu", "accountId": "cs" } },
+    { "agentId": "coo", "match": { "channel": "feishu", "accountId": "coo" } },
+    { "agentId": "cmo", "match": { "channel": "feishu", "accountId": "cmo" } },
+    { "agentId": "cco", "match": { "channel": "feishu", "accountId": "cco" } }
+  ],
   "agents": {
     "defaults": {
       "model": {
@@ -53,7 +84,7 @@
         "name": "CEO Agent",
         "default": true,
         "workspace": "/root/workspace-ceo",
-        "identity": { "name": "CEO Bot" },
+        "identity": { "name": "CEO Bot", "emoji": "🏛️" },
         "groupChat": {
           "mentionPatterns": ["@CEO", "@ceo", "@CEO Bot"]
         }
@@ -62,7 +93,7 @@
         "id": "cs",
         "name": "CS Agent",
         "workspace": "/root/workspace-cs",
-        "identity": { "name": "CS Bot" },
+        "identity": { "name": "CS Bot", "emoji": "📞" },
         "groupChat": {
           "mentionPatterns": ["@CS", "@cs", "@CS Bot", "@CSKH"]
         }
@@ -71,7 +102,7 @@
         "id": "coo",
         "name": "COO Agent",
         "workspace": "/root/workspace-coo",
-        "identity": { "name": "COO Bot" },
+        "identity": { "name": "COO Bot", "emoji": "📦" },
         "groupChat": {
           "mentionPatterns": ["@COO", "@coo", "@COO Bot", "@VanHanh"]
         }
@@ -80,7 +111,7 @@
         "id": "cmo",
         "name": "CMO Agent",
         "workspace": "/root/workspace-cmo",
-        "identity": { "name": "CMO Bot" },
+        "identity": { "name": "CMO Bot", "emoji": "📢" },
         "groupChat": {
           "mentionPatterns": ["@CMO", "@cmo", "@CMO Bot", "@Marketing"]
         }
@@ -89,7 +120,7 @@
         "id": "cco",
         "name": "CCO Agent",
         "workspace": "/root/workspace-cco",
-        "identity": { "name": "CCO Bot" },
+        "identity": { "name": "CCO Bot", "emoji": "💬" },
         "groupChat": {
           "mentionPatterns": ["@CCO", "@cco", "@CCO Bot", "@Quality"]
         }
