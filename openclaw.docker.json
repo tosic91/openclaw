@@ -16,13 +16,6 @@
       "enabled": true,
       "domain": "lark",
       "dmPolicy": "open",
-      "allowFrom": ["*"],
-      "groupPolicy": "open",
-      "requireMention": true,
-      "streaming": true,
-      "blockStreaming": true,
-      "typingIndicator": true,
-      "resolveSenderNames": true,
       "accounts": {
         "ceo": {
           "appId": "${LARK_CEO_APP_ID}",
